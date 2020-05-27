@@ -27,12 +27,10 @@ import org.litepal.crud.DataSupport;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
-
-
-
 import static android.app.AlertDialog.*;
 
 /**
@@ -53,22 +51,16 @@ public class ChooseAreaFragment extends Fragment {
 
     // Province Table
     private List<Province> provinceList;
-
     // City Table
     private List<City> cityList;
-
     // County Table
     private List<County> countyList;
-
     // selected Province
     private Province selectedProvince;
-
     // selected City
     private City selectedCity;
-
     // current selected level
     private int currentLevel;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.choose_area, container, false);
@@ -186,9 +178,8 @@ public class ChooseAreaFragment extends Fragment {
     private void queryFromServer(String address, final String type) {
         //showAlertDialog();
         HttpUtil.sendOkHttpRequest(address, new Callback() {
-
            @Override
-            public void onResponse(okhttp3.Call call, Response response) throws IOException {
+            public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
                 boolean result = false;
                 if ("province".equals(type)) {
@@ -216,7 +207,7 @@ public class ChooseAreaFragment extends Fragment {
             } // end of onResponse()
 
            // @Override
-            public void onFailure(okhttp3.Call call, IOException e) {
+            public void onFailure(Call call, IOException e) {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -242,6 +233,5 @@ public class ChooseAreaFragment extends Fragment {
             alertDialog.dismiss();
         }
     }
-
 
 } // end of class ChooseAreaFragment
